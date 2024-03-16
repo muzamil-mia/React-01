@@ -1,0 +1,21 @@
+{
+  "name": "hello-react",
+  "version": "1.0.0",
+  "description": "First React App",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "(https://github.com/muzamil-mia/React-01)"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "react",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+}
