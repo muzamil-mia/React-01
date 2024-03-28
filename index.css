@@ -1,3 +1,85 @@
-#h1{
+#heading{
   color: red;
 }
+*{
+  margin: 0;
+  padding: 0;
+}
+.nav{
+  border: 2px solid;
+  height: 120px;
+}
+.header{
+  display: flex;
+  width: 96%;
+  height: inherit;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  border: 2px solid;
+}
+.header div img{
+  width: 150px;
+  height: 110px;
+}
+.nav-items ul{
+  /* border: 2px solid; */
+   display: inline-flex;
+   justify-content: space-between;
+   width: 400px;
+  list-style: none;
+}
+.nav-items ul li{
+  padding-inline:15px;
+  /* border: 1px solid; */
+  padding: 10px 20px;
+  margin: 0px 5px;
+  font-size: 18px;
+  font-weight: bolder;
+}
+.search{
+  margin:  10px;
+}
+.restaurant-list {
+  border: 2px solid;
+  width: 97%;
+  margin: 10px auto;
+  /* display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-grow: 1; */
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 32px;
+  margin: 32px 16px;
+}
+.card{
+  border: 2px solid;
+  width: 300px;
+  height: 400px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+.card> .image {
+  border: 2px solid ;
+  height: 70%;
+}
+.image>img{
+  width: 100%;
+  height: 100%;
+}
+.card > .details {
+  height: 40%;
+  /* border: 2px solid green; */
+  
+}
+
+  @media screen and (max-width: 768px) {
+    .restaurant-list {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+      margin: 16px;
+    }
+  }

@@ -1,0 +1,104 @@
+
+/*
+<div id="parent">
+  <div id="child1">
+    <h1>hello</h1>
+  </div>
+</div>
+*/
+
+// const parent = React.createElement("div", {id:"parent"},React.createElement("div",{id:"child"},React.createElement("h1",{"id":"heading1"},"i am h1 tag")));
+/*
+const parent = React.createElement("div",{id:"parent"},React.createElement("div",{id:"child1"},[React.createElement("h1",{id:""},"i am h1"),React.createElement("h2",{id:""},"i am h2")]))
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(parent)
+*/
+
+//nested structure
+/*
+<div id="parent">
+  <div id="child1">
+    <h1>hello</h1>
+  </div>
+  <div id="child1">
+    <h1>hello</h1>
+  </div>
+</div>
+*/
+/*
+const parent = React.createElement("div", { id: "parent" }, [
+  React.createElement("div", { id: "child1" }, [
+    React.createElement("h1", { id: "" }, "this is react app"),
+    React.createElement("h2", { id: "" }, "i am h2"),
+  ]),
+  React.createElement("div", { id: "child1" }, [
+    React.createElement("h1", { id: "" }, "i am h1"),
+    React.createElement("h2", { id: "" }, "i am h2"),
+  ]),
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(parent);
+*/
+
+
+//episode two code
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+//React element
+//creating react element using react
+const heading = React.createElement("h1", {id:"heading"},"hello react");
+//const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(heading);
+
+//jsx is not html in javascript rather it's a syntax, it's HTMl like or XML like syntax
+//creating react element using jsx
+const jsxHeading = <h1 id="heading" className="h1">Hello react 💯</h1> //Babel internally converts this jsx code into React element
+//here we give class using className
+console.log(jsxHeading);
+root.render(jsxHeading)
+//jsx in multiple line must be wrapped inside parentheses
+const jsxHeading1 = (
+  <h1>hello react</h1>,
+  <h2>hello react</h2>
+)
+
+//LAYING THE FOUNDATION
+//FUNCTIONAL COMPONENT
+//React functional Component is nothing but a normal javascript function which returns some jsx or react element
+const elem = <span>span tag</span>
+const Title = () => (
+  {elem},
+  <h1>this is title component</h1>
+)
+
+//we can use normal js function also
+// const Title1 = function() {
+// return(
+  
+//   <h1>this is title component</h1>
+// );
+//}
+const HeadingComponent = () => {
+  return <h1>Hello React Functional Component</h1>
+}
+const number = 1000;
+const HeadingComponent1 = () => (
+  <div id="container">
+  <Title/>
+  {Title()}
+  <h2>{number}</h2> we can write any piece of javascript code inside jsx
+  {10+20}, //expression
+  {Title} //since Title is nothing but a variable
+  <h1>hello react</h1>
+  <h2>hello react again</h2>
+  </div>
+);
+
+//arrow function with one statement can be write like below also
+const HeadingComponent2 = () => <h1>hello react </h1>
+const root = ReactDOM.createRoot(document.getElementById("root"));
+//syntax to render functional component
+root.render(<HeadingComponent1/>);
