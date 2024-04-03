@@ -1,1 +1,3 @@
-#Hello React
+/node_modules
+/.parcel-cache
+/dist
