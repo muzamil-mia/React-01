@@ -6,20 +6,32 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import Contact from "./components/Cntact";
 import Error from "./components/Error";
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-
+//import Grocerry from "./components/Grocerry";
 import RestaurantMenu from "./components/RestaurantMenu";
+// const Grocerry = lazy(() => {
+//   import("./components/Grocerry");
+// });
+const Grocerry = React.lazy(() => import("./components/Grocerry"));
 
 const AppLayout = () => {
   return (
     <div className="app">
       <Header />
       {/* <Body /> */}
-      <Outlet/>
+      <Outlet />
       <Footer />
     </div>
   );
 };
+
+//chunking
+//code splitting
+//Dynamic Bundling
+//Lazy loading or on demand loading
+
+
 
 const appRouter = createBrowserRouter([
   {
@@ -30,7 +42,12 @@ const appRouter = createBrowserRouter([
         path: "/",
         element: <Body />,
       },
-
+      {
+        path: "/grocerry",
+        element: <Suspense fallback={<h1>Loading....</h1>}>
+          <Grocerry/>
+        </Suspense>,
+      },
       {
         path: "/about",
         element: <About />,
@@ -41,8 +58,8 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/restaurants/:resId",
-        element: <RestaurantMenu/>
-      }
+        element: <RestaurantMenu />,
+      },
     ],
     errorElement: <Error />,
   },
