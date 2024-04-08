@@ -9,32 +9,32 @@ const Header = () => {
   const onlineStatus = useOnlineStatus();
 
   return (
-    <div className="nav">
-      <div className="header">
-        <div>
-          <img src={LOGO_URl} />
+    <div className="nav border-solid border-4">
+      <div className="flex justify-between items-center">
+        <div className="border-solid border-4 w-40">
+          <img className="w-35"  src={LOGO_URl} />
         </div>
-        <div className="nav-items">
-          <ul>
-          <li>
-            Online Status: {onlineStatus ? "🟢" : "🔴"}
-          </li>
-          <li>
-            <Link to = "/grocerry">Grocerry</Link>
-          </li>
-            <li>
+        <div className="nav-items border-solid border-4 w-[600px]">
+          <ul className="flex justify-between">
+            <li className="p-4">Online Status: {onlineStatus ? "🟢" : "🔴"}</li>
+            <li  className="p-4">
+              <Link to="/grocerry">Grocerry</Link>
+            </li>
+            <li  className="p-4">
               <Link to="/">Home</Link>
             </li>
-            <li>
+            <li  className="p-4">
               <Link to="/contact">Contact</Link>
             </li>
             {/* never use anchor tag here as it will reload the whole page  use link instead*/}
             {/* <li><a href="/about">About</a></li> */}
-            <li>
+            <li  className="p-4">
               <Link to="/about">About</Link>
             </li>
-            <li><Link to="/cart">Cart</Link></li>
-            <li>
+            <li  className="p-4">
+              <Link to="/cart">Cart</Link>
+            </li>
+            <li  className="p-4">
               <button
                 className="btn"
                 onClick={() => {

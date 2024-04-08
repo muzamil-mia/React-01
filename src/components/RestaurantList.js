@@ -9,9 +9,7 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 const RestaurantList = () => {
   const [restaurantsList, setRestaurantsList] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  //console.log(restaurantsList)
   const [searchText, setSearchText] = useState("");
-  //console.log(searchText)
   useEffect(() => {
     fetchData();
   }, []);
@@ -46,17 +44,17 @@ const RestaurantList = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="flex justify-between border-4 w-[600px] m-auto mt-5">
+        <div className="w-[400px] border-2">
           <input
             type="text"
-            className="searchBox"
+            className="border-solid border-2 border-black p-2 w-[300px]"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
-          <button onClick={() => {
+          <button className="border-solid border-2 p-2 w-[96px]" onClick={() => {
             const filteredList = restaurantsList.filter((res) => {
               console.log(res)
               return res.info.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())
@@ -66,7 +64,7 @@ const RestaurantList = () => {
             console.log(filteredList)
           }}>Search</button>
         </div>
-        <button onClick={() => {
+        <button className="border-2 p-2 w-[96px]" onClick={() => {
           const filteredList = restaurantsList.filter(res => res.info.avgRating > 4.3);
           setFilteredRestaurants(filteredList)
           console.log(filteredList);
@@ -74,7 +72,7 @@ const RestaurantList = () => {
         top
         </button>
       </div>
-      <div className="restaurant-list">
+      <div className="flex flex-wrap  border-4">
         {filteredRestaurants.map((res) => (
         // console.log(res.info.id)
         <Link key={res.info.id} to={"/restaurants/" + res.info.id}><RestaurantCard resData={res.info} /></Link>

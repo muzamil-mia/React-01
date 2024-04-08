@@ -6,9 +6,9 @@ const RestaurantCard = ({ resData }) => {
   //console.log(name);
   return (
     
-    <div className="card">
-      <div className="image">
-        <img src={CDN_URL + cloudinaryImageId} alt="card" />
+    <div className="m-4 p-4 w-[300px] h-[400px] rounded-lg border-4">
+      <div className="rounded-lg border-4 h-2/3">
+        <img className="w-auto " src={CDN_URL + cloudinaryImageId} alt="card" />
       </div>
       <div className="details">
         <span className="card-title">{name}</span>
