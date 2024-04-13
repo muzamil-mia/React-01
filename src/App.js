@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -10,19 +10,27 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 //import Grocerry from "./components/Grocerry";
 import RestaurantMenu from "./components/RestaurantMenu";
-// const Grocerry = lazy(() => {
-//   import("./components/Grocerry");
-// });
-const Grocerry = React.lazy(() => import("./components/Grocerry"));
+import UserContext from "./utils/UserContext";
 
 const AppLayout = () => {
+  const [userName, setUserName] = useState();
+
+  //authentication code
+  useEffect(() => {
+    const data = {
+      name: "muzami hussain"
+    };
+    setUserName(data.name);
+  },[])
   return (
+    <UserContext.Provider value = {{loggedInUser: userName, setUserName}}>
     <div className="app">
       <Header />
       {/* <Body /> */}
       <Outlet />
       <Footer />
     </div>
+    </UserContext.Provider>
   );
 };
 
@@ -31,6 +39,10 @@ const AppLayout = () => {
 //Dynamic Bundling
 //Lazy loading or on demand loading
 
+// const Grocerry = lazy(() => {
+//   import("./components/Grocerry");
+// });
+const Grocerry = React.lazy(() => import("./components/Grocerry"));
 
 
 const appRouter = createBrowserRouter([
@@ -50,7 +62,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About />,
+        element: <About name = {"muzamil"} />,
       },
       {
         path: "/contact",

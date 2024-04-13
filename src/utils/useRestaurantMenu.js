@@ -22,7 +22,7 @@ export default function useRestaurantMenu(resId) {
     const data = await fetch(MENU_API + resId);
     const json = await data.json();
     setResInfo(json);
-    console.log(json);
+    //console.log(json);
   };
   return resInfo;
 }

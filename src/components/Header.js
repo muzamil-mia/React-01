@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useContext, useReducer } from "react";
 import { LOGO_URl } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
   // let btnName = "login";
   let [btnName, setBtnName] = useState("login");
   const onlineStatus = useOnlineStatus();
+
+  const {loggedInUser} = useContext(UserContext);
+  console.log(loggedInUser);
 
   return (
     <div className="nav border-solid border-4">
@@ -17,6 +21,7 @@ const Header = () => {
         <div className="nav-items border-solid border-4 w-[600px]">
           <ul className="flex justify-between">
             <li className="p-4">Online Status: {onlineStatus ? "🟢" : "🔴"}</li>
+            <li className="p-4">{loggedInUser}</li>
             <li  className="p-4">
               <Link to="/grocerry">Grocerry</Link>
             </li>
