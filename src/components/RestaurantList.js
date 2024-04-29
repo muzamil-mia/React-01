@@ -2,10 +2,11 @@ import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import { RESTAURANT_LIST as restaurants } from "../utils/constants";
 //console.log(restaurants);
 import Shimmer from "./Shimmer";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, startTransition } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { debounce } from "lodash";
 
 const RestaurantList = () => {
   const [restaurantsList, setRestaurantsList] = useState([]);
@@ -17,7 +18,17 @@ const RestaurantList = () => {
   }
   const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
-  const {loggedInUser, setUserName } = useContext(UserContext);
+  const { loggedInUser, setUserName } = useContext(UserContext);
+
+  const debouncedSearch = debounce((searchTerm) => {
+    // console.log("api call");
+  }, 2000);
+
+
+  const handleInputChange = (e) => {
+    setSearchText(e.target.value);
+    debouncedSearch(e.target.value);
+  };
 
   useEffect(() => {
     fetchData();
@@ -50,7 +61,7 @@ const RestaurantList = () => {
   // }
   //console.log("body rendered");
 
-  return restaurantsList.length === 0 ? (
+  return restaurantsList?.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
@@ -60,22 +71,24 @@ const RestaurantList = () => {
             type="text"
             className="border-solid border-2 border-black p-2 w-[300px]"
             value={searchText}
-            onChange={(e) => {
-              setSearchText(e.target.value);
-            }}
+            // onChange={(e) => {
+            //   setSearchText(e.target.value);
+            // }}
+            // onChange={handleChange}
+            onChange={handleInputChange}
           />
           <button
             className="border-solid border-2 p-2 w-[96px]"
             onClick={() => {
               const filteredList = restaurantsList.filter((res) => {
-                console.log(res);
+                // console.log(res);
                 return res.info.name
                   .toLocaleLowerCase()
                   .includes(searchText.toLocaleLowerCase());
               });
               //console.log(res.info.name)
               setFilteredRestaurants(filteredList);
-              console.log(filteredList);
+              //console.log(filteredList);
             }}
           >
             Search
@@ -88,20 +101,23 @@ const RestaurantList = () => {
               (res) => res.info.avgRating > 4.3
             );
             setFilteredRestaurants(filteredList);
-           // console.log(filteredList);
+            // console.log(filteredList);
           }}
         >
           top
         </button>
         <div>
           <label htmlFor="">user Name</label>
-          <input type="text" className="border border-2 p-2"
-          value = {loggedInUser} onChange={(e) => setUserName(e.target.value)}/>
+          <input
+            type="text"
+            className="border border-2 p-2"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </div>
       </div>
       <div className="flex flex-wrap  border-4">
         {filteredRestaurants.map((res) => (
-          // console.log(res.info.id)
           <Link key={res.info.id} to={"/restaurants/" + res.info.id}>
             {res.info.isOpen ? (
               <RestaurantCardPromoted resData={res.info} />

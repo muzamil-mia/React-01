@@ -9,12 +9,22 @@ const RestaurantMenu = () => {
   // const [resInfo, setResInfo] = useState(null);
 
    const {resId} = useParams();
+   
   
   //creating custom hook
   const resInfo = useRestaurantMenu(resId);
   //console.log(resInfo);
 
-  const [showIndex, setShowIndex] = useState(0);
+  const [showIndex, setShowIndex] = useState(-1);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleCategoryClick = (index) => {
+    if(index === showIndex) {
+      setShowIndex(-1)
+    }else{
+      setShowIndex(index)
+    }
+  }
 
   // useEffect(() => {
   //   fetchMenu();
@@ -51,7 +61,7 @@ const RestaurantMenu = () => {
       {
         resCategories.map((category, index) => {
           return <RestaurantCategory resData = {category?.card?.card} showItems = {index === showIndex ? true : false}
-            setShowIndex = {() => setShowIndex(index)}
+            handleCategoryClick = {() => setShowIndex(index)}
           />
           
         })
